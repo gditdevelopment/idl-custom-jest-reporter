@@ -5,7 +5,8 @@ export const saveCsvReport = async (testResults: TestResult[], path: string) => 
   const csvWriter = createObjectCsvWriter({
     path,
     header: [
-      { id: 'fullName', title: 'NAME' },
+      { id: 'testName', title: 'TESTNAME' },
+      { id: 'suiteName', title: 'SUITENAME' },
       { id: 'duration', title: 'DURATION' },
       { id: 'status', title: 'STATUS' },
     ],

@@ -22,7 +22,8 @@ export const extractJestReports = (testData) => {
       .filter(nonPendingTest)
       .map((testResult) => ({
         duration: testResult.duration,
-        fullName: testResult.fullName,
+        suiteName: testResult.ancestorTitles[0],
+        testName: testResult.title,
         status: testResult.status,
       })),
   }));
