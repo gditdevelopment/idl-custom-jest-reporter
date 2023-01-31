@@ -10,6 +10,15 @@ export interface TestResult {
   suiteName: string;
   testName: string;
   status: 'failed' | 'passed' | 'pending' | 'skipped';
+  numSuitePassingTests: number;
+  numSuiteFailingTests: number;
+  numSuiteSkippedTests: number;
+  suiteStartTime: number;
+  suiteEndTime: number;
+  suiteDuration: number;
+  suiteSlowWarning: boolean;
+  failureMessage: string;
+  testFilePath: string;
 }
 
 export const extractJestReports = (testData) => {
@@ -30,11 +39,20 @@ export const extractJestReports = (testData) => {
   const results = testResults.map((testResult) => ({
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
-      .map((testResult) => ({
-        duration: testResult.duration == null ? -1 : testResult.duration,
-        suiteName: testResult.ancestorTitles[0],
-        testName: testResult.title,
-        status: determineStatus(testResult),
+      .map((test) => ({
+        duration: test.duration == null ? -1 : test.duration,
+        suiteName: test.ancestorTitles[0],
+        testName: test.title,
+        status: determineStatus(test),
+        numSuitePassingTests: testResult.numPassingTests,
+        numSuiteFailingTests: testResult.numFailingTests,
+        numSuiteSkippedTests: testResult.numPendingTests,
+        suiteStartTime: testResult.perfStats.start,
+        suiteEndTime: testResult.perfStats.end,
+        suiteDuration: testResult.perfStats.runtime,
+        suiteSlowWarning: testResult.perfStats.slow,
+        failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
+        testFilePath: testResult.testFilePath
       })),
   }));
   return mapTestReports(results);
