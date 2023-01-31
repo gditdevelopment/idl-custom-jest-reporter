@@ -7,24 +7,34 @@ export interface Report {
 
 export interface TestResult {
   duration: number;
-  fullName: string;
-  status: 'failed' | 'passed' | 'pending';
+  suiteName: string;
+  testName: string;
+  status: 'failed' | 'passed' | 'pending' | 'skipped';
 }
 
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
-  const nonSkippedTest = (testResult) => testResult.duration !== null;
-  const nonPendingTest = (testResult) => testResult.status !== 'pending'; // skipped tests are pending
+  testResults.forEach((result) => {
+    console.log("RESULT: ");
+    console.log(result);
+    console.log(result.testResults[0].ancestorTitles);
+  })
+  console.log('--------------TEST RESULTS------------------');
+  console.log(testResults);
+  const determineStatus = (testResult) => {
+    if (testResult.duration == null && testResult.status == 'pending')
+      return 'skipped'
+    else
+      return testResult.status
+  };
   const results = testResults.map((testResult) => ({
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
-      .filter(nonSkippedTest)
-      .filter(nonPendingTest)
       .map((testResult) => ({
-        duration: testResult.duration,
+        duration: testResult.duration == null ? -1 : testResult.duration,
         suiteName: testResult.ancestorTitles[0],
         testName: testResult.title,
-        status: testResult.status,
+        status: determineStatus(testResult),
       })),
   }));
   return mapTestReports(results);
