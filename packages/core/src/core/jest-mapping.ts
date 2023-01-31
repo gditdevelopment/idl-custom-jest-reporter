@@ -23,13 +23,6 @@ export interface TestResult {
 
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
-  testResults.forEach((result) => {
-    console.log("RESULT: ");
-    console.log(result);
-    console.log(result.testResults[0].ancestorTitles);
-  })
-  console.log('--------------TEST RESULTS------------------');
-  console.log(testResults);
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
       return 'skipped'
