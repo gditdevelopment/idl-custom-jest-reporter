@@ -42,7 +42,7 @@ export const extractJestReports = (testData) => {
         numSuiteSkippedTests: testResult.numPendingTests,
         suiteStartTime: testResult.perfStats.start / 1000,
         suiteEndTime: testResult.perfStats.end / 1000,
-        suiteDuration: testResult.perfStats.runtime,
+        suiteDuration: testResult.perfStats.runtime / 1000,
         suiteSlowWarning: testResult.perfStats.slow,
         failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
         testFilePath: testResult.testFilePath
