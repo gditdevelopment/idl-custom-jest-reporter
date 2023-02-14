@@ -9,7 +9,16 @@ export const saveCsvReport = async (testResults: TestResult[], path: string) => 
       { id: 'suiteName', title: 'SUITENAME' },
       { id: 'duration', title: 'DURATION' },
       { id: 'status', title: 'STATUS' },
-    ],
+      { id: 'numSuitePassingTests', title: 'SUITEPASSINGTESTS' },
+      { id: 'numSuiteFailingTests', title: 'SUITEFAILINGTESTS' },
+      { id: 'numSuiteSkippedTests', title: 'SUITESKIPPEDTESTS' },
+      { id: 'suiteStartTime', title: 'SUITESTARTTIME' },
+      { id: 'suiteEndTime', title: 'SUITEENDTIME' },
+      { id: 'suiteDuration', title: 'SUITEDURATION' },
+      { id: 'suiteSlowWarning', title: 'SUITESLOWWARNING' },
+      { id: 'failureMessage', title: 'FAILUREMESSAGE' },
+      { id: 'testFilePath', title: 'TESTFILEPATH' }
+    ]
   });
 
   return csvWriter.writeRecords(testResults);

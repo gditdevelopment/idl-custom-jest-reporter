@@ -7,17 +7,47 @@ export interface Report {
 
 export interface TestResult {
   duration: number;
-  fullName: string;
-  status: 'failed' | 'passed' | 'pending';
+  suiteName: string;
+  testName: string;
+  status: 'failed' | 'passed' | 'pending' | 'skipped';
+  numSuitePassingTests: number;
+  numSuiteFailingTests: number;
+  numSuiteSkippedTests: number;
+  suiteStartTime: number;
+  suiteEndTime: number;
+  suiteDuration: number;
+  suiteSlowWarning: boolean;
+  failureMessage: string;
+  testFilePath: string;
 }
 
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
-  const nonSkippedTest = (testResult) => testResult.duration !== null;
-  const nonPendingTest = (testResult) => testResult.status !== 'pending'; // skipped tests are pending
+  const determineStatus = (testResult) => {
+    if (testResult.duration == null && testResult.status == 'pending')
+      return 'skipped'
+    else
+      return testResult.status
+  };
   const results = testResults.map((testResult) => ({
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
+<<<<<<< HEAD
+      .map((test) => ({
+        duration: test.duration == null ? -1 : test.duration,
+        suiteName: test.ancestorTitles[0],
+        testName: test.title,
+        status: determineStatus(test),
+        numSuitePassingTests: testResult.numPassingTests,
+        numSuiteFailingTests: testResult.numFailingTests,
+        numSuiteSkippedTests: testResult.numPendingTests,
+        suiteStartTime: testResult.perfStats.start / 1000,
+        suiteEndTime: testResult.perfStats.end / 1000,
+        suiteDuration: testResult.perfStats.runtime / 1000,
+        suiteSlowWarning: testResult.perfStats.slow,
+        failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
+        testFilePath: testResult.testFilePath
+=======
       .filter(nonSkippedTest)
       .filter(nonPendingTest)
       .map((testResult) => ({
@@ -25,6 +55,7 @@ export const extractJestReports = (testData) => {
         suiteName: testResult.ancestorTitles[0],
         testName: testResult.title,
         status: testResult.status,
+>>>>>>> main
       })),
   }));
   return mapTestReports(results);
