@@ -32,7 +32,6 @@ export const extractJestReports = (testData) => {
   const results = testResults.map((testResult) => ({
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
-<<<<<<< HEAD
       .map((test) => ({
         duration: test.duration == null ? -1 : test.duration,
         suiteName: test.ancestorTitles[0],
@@ -47,15 +46,6 @@ export const extractJestReports = (testData) => {
         suiteSlowWarning: testResult.perfStats.slow,
         failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
         testFilePath: testResult.testFilePath
-=======
-      .filter(nonSkippedTest)
-      .filter(nonPendingTest)
-      .map((testResult) => ({
-        duration: testResult.duration,
-        suiteName: testResult.ancestorTitles[0],
-        testName: testResult.title,
-        status: testResult.status,
->>>>>>> main
       })),
   }));
   return mapTestReports(results);
