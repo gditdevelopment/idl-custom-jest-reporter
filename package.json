@@ -17,9 +17,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "chalk": "4.1.2",
+    "csv-writer": "1.6.0",
     "@babel/core": "7.16.0",
     "@babel/preset-env": "7.16.4",
     "@babel/preset-typescript": "7.16.0",
+    "@jest/reporters": "28.1.0",
     "@jest/console": "27.4.2",
     "@jest/test-result": "27.4.2",
     "@jest/types": "27.4.2",
