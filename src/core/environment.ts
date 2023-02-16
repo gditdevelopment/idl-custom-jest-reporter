@@ -1,13 +1,13 @@
 export function extractStringEnvVar(
-    key: keyof NodeJS.ProcessEnv,
+  key: keyof NodeJS.ProcessEnv,
 ): string {
-    const value = process.env[key];
+  const value = process.env[key];
 
-    if (value === null || value === undefined) {
-        const message = `The environment variable "${key}" cannot be "${String(value)}".`;
+  if (value === null || value === undefined) {
+    const message = `The environment variable "${key}" cannot be "${String(value)}".`;
 
-        throw new Error(message);
-    }
+    throw new Error(message);
+  }
 
-    return value;
+  return value;
 }
