@@ -15,11 +15,12 @@ const config = {
       exports: 'default',
     },
   ],
-  external: ['fs'],
+  external: ['fs', 'aws-sdk'],
   plugins: [
     nodeResolve({
       jsnext: true,
       extensions,
+      preferBuiltins: false
     }),
     babel({
       extensions,

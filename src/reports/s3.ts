@@ -1,5 +1,5 @@
 import { extractStringEnvVar } from '../core/environment';
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import * as AWS from 'aws-sdk';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -9,7 +9,7 @@ export const uploadToS3 = async (bucketName: string, filePath: string) => {
     const SECRET_KEY:string = extractStringEnvVar('AWS_SECRET_ACCESS_KEY');
     const REGION:string = extractStringEnvVar('AWS_REGION');
     
-    const s3Client = new S3Client({ region: REGION });
+    const s3Client = new AWS.S3({ region: REGION });
     const fileStream = fs.createReadStream(filePath);
     const uploadParams = {
       Bucket: bucketName,
@@ -17,8 +17,8 @@ export const uploadToS3 = async (bucketName: string, filePath: string) => {
       Body: fileStream,
     };
     
-    const data = await s3Client.send(new PutObjectCommand(uploadParams));
-    console.log("Success", data);
+    const data = await s3Client.upload(uploadParams).promise();
+    console.log("Upload successful", data);
     return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
