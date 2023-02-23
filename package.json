@@ -7,7 +7,8 @@
   "module": "dist/index.js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "jest.config.js"
   ],
   "sideEffects": false,
   "scripts": {
