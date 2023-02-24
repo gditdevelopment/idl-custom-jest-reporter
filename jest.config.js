@@ -1,6 +1,9 @@
 /** @returns {Promise<import('jest').Config>} */
 module.exports = async () => {
   return {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    },
     "reporters": [
       "default",
       [

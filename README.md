@@ -17,9 +17,12 @@ If you would like to upload the csv results to an s3 bucket:
 3. Ensure the AWS SDK v2 for Javascript (`npm i aws-sdk`) has been installed on your system. This is not bundled in the reporter.
 
 ## Enabling reporter
-Configure jest to use this reporter via the jest section in the package.json or your jest config.
+Configure jest to use this reporter via the jest section in the package.json or your jest config. A jest.config.js file that enables the reporter is provided in the module when installed.
 
 ```json
+"moduleNameMapper": {
+  "axios": "axios/dist/node/axios.cjs"
+},
 "reporters": [
   "default",
   [
