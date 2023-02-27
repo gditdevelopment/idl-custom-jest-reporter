@@ -4,6 +4,7 @@ const { createObjectCsvWriter } = require('csv-writer');
 export const saveCsvReport = async (testResults: TestResult[], path: string) => {
   const csvWriter = createObjectCsvWriter({
     path,
+    alwaysQuote: true,
     header: [
       { id: 'testName', title: 'TESTNAME' },
       { id: 'suiteName', title: 'SUITENAME' },
