@@ -22,6 +22,7 @@ export interface TestResult {
 }
 
 export const extractJestReports = (testData) => {
+  console.log(testData);
   const { testResults } = testData;
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
