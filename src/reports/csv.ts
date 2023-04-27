@@ -6,6 +6,7 @@ export const saveCsvReport = async (testResults: TestResult[], path: string) => 
     path,
     alwaysQuote: true,
     header: [
+      { id: 'all', title: 'ALL' },
       { id: 'testName', title: 'TESTNAME' },
       { id: 'suiteName', title: 'SUITENAME' },
       { id: 'duration', title: 'DURATION' },

@@ -6,6 +6,7 @@ export interface Report {
 }
 
 export interface TestResult {
+  all: string;
   duration: number;
   suiteName: string;
   testName: string;
@@ -22,7 +23,6 @@ export interface TestResult {
 }
 
 export const extractJestReports = (testData) => {
-  console.log(testData);
   const { testResults } = testData;
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
@@ -34,6 +34,7 @@ export const extractJestReports = (testData) => {
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
       .map((test) => ({
+        all: testData,
         duration: test.duration == null ? -1 : test.duration,
         suiteName: test.ancestorTitles[0],
         testName: test.title,
