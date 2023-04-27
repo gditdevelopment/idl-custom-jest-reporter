@@ -34,7 +34,7 @@ export const extractJestReports = (testData) => {
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
       .map((test) => ({
-        all: test,
+        all: test.toString(),
         duration: test.duration == null ? -1 : test.duration,
         suiteName: test.ancestorTitles[0],
         testName: test.title,
