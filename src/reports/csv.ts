@@ -2,6 +2,7 @@ import { TestResult } from '../core/jest-mapping';
 const { createObjectCsvWriter } = require('csv-writer');
 
 export const saveCsvReport = async (testResults: TestResult[], path: string) => {
+  console.log(testResults);
   const csvWriter = createObjectCsvWriter({
     path,
     alwaysQuote: true,
@@ -18,7 +19,8 @@ export const saveCsvReport = async (testResults: TestResult[], path: string) => 
       { id: 'suiteDuration', title: 'SUITEDURATION' },
       { id: 'suiteSlowWarning', title: 'SUITESLOWWARNING' },
       { id: 'failureMessage', title: 'FAILUREMESSAGE' },
-      { id: 'testFilePath', title: 'TESTFILEPATH' }
+      { id: 'testFilePath', title: 'TESTFILEPATH' },
+      { id: 'testLocationInResults', title: 'TESTLOCATIONINRESULTS' }
     ]
   });
 
