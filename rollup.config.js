@@ -1,6 +1,8 @@
 import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
+import nodeResolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
+import json from '@rollup/plugin-json'
+import commonjs from '@rollup/plugin-commonjs'
 
 const extensions = ['.ts', '.js']
 
@@ -13,17 +15,20 @@ const config = {
       exports: 'default',
     },
   ],
-  external: ['fs'],
+  external: ['fs', 'aws-sdk'],
   plugins: [
-    resolve({
+    nodeResolve({
       jsnext: true,
       extensions,
+      preferBuiltins: false
     }),
     babel({
       extensions,
       babelHelpers: 'bundled',
     }),
     terser(),
+    json(),
+    commonjs()
   ],
 }
 

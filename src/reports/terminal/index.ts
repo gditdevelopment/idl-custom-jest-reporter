@@ -19,7 +19,7 @@ export const printTestResults = (testResults: TestResult[], logOptions: LogLevel
       (testResult) => detectLogType(testResult.duration, logOptions) === 'error'
     );
     slowTestResults.forEach((testResult) =>
-      logError(` ${formatTime(testResult.duration)} `, testResult.fullName)
+      logError(` ${formatTime(testResult.duration)} `, testResult.testName)
     );
   }
 
@@ -28,7 +28,7 @@ export const printTestResults = (testResults: TestResult[], logOptions: LogLevel
       (testResult) => detectLogType(testResult.duration, logOptions) === 'warn'
     );
     mediumTestResults.forEach((testResult) =>
-      logWarn(` ${formatTime(testResult.duration)} `, testResult.fullName)
+      logWarn(` ${formatTime(testResult.duration)} `, testResult.testName)
     );
   }
 
@@ -37,7 +37,7 @@ export const printTestResults = (testResults: TestResult[], logOptions: LogLevel
       (testResult) => detectLogType(testResult.duration, logOptions) === 'success'
     );
     fastTestResults.forEach((testResult) =>
-      logSuccess(` ${formatTime(testResult.duration)} `, testResult.fullName)
+      logSuccess(` ${formatTime(testResult.duration)} `, testResult.testName)
     );
   }
 };
