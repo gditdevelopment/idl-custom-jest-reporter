@@ -24,7 +24,7 @@ export interface TestResult {
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
   console.log(testResults);
-  console.log(testResults.testResults);
+  console.log(testResults.testResults.toString());
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
       return 'skipped'
