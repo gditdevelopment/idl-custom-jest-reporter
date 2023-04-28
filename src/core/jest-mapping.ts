@@ -19,6 +19,7 @@ export interface TestResult {
   suiteSlowWarning: boolean;
   failureMessage: string;
   testFilePath: string;
+  testLocationLineNumber: number;
 }
 
 export const extractJestReports = (testData) => {
