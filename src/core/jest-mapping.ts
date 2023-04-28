@@ -6,7 +6,6 @@ export interface Report {
 }
 
 export interface TestResult {
-  all: string;
   duration: number;
   suiteName: string;
   testName: string;
@@ -24,8 +23,8 @@ export interface TestResult {
 
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
-  console.log(testData);
   console.log(testResults);
+  console.log(testResults.testResults);
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
       return 'skipped'
@@ -36,7 +35,6 @@ export const extractJestReports = (testData) => {
     testFilePath: testResult.testFilePath,
     testResults: testResult.testResults
       .map((test) => ({
-        all: testData.toString(),
         duration: test.duration == null ? -1 : test.duration,
         suiteName: test.ancestorTitles[0],
         testName: test.title,
