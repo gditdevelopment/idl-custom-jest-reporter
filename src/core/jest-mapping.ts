@@ -23,8 +23,6 @@ export interface TestResult {
 
 export const extractJestReports = (testData) => {
   const { testResults } = testData;
-  console.log(testResults);
-  console.log(testResults.testResults.toString());
   const determineStatus = (testResult) => {
     if (testResult.duration == null && testResult.status == 'pending')
       return 'skipped'
@@ -47,7 +45,8 @@ export const extractJestReports = (testData) => {
         suiteDuration: testResult.perfStats.runtime / 1000,
         suiteSlowWarning: testResult.perfStats.slow,
         failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
-        testFilePath: testResult.testFilePath
+        testFilePath: testResult.testFilePath,
+        testLocationLineNumber: test.location.line
       })),
   }));
   return mapTestReports(results);
