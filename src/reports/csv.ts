@@ -18,7 +18,8 @@ export const saveCsvReport = async (testResults: TestResult[], path: string) => 
       { id: 'suiteDuration', title: 'SUITEDURATION' },
       { id: 'suiteSlowWarning', title: 'SUITESLOWWARNING' },
       { id: 'failureMessage', title: 'FAILUREMESSAGE' },
-      { id: 'testFilePath', title: 'TESTFILEPATH' }
+      { id: 'testFilePath', title: 'TESTFILEPATH' },
+      { id: 'testLocationLineNumber', title: 'TESTLOCATIONLINENUMBER' }
     ]
   });
 

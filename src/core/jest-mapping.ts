@@ -19,6 +19,7 @@ export interface TestResult {
   suiteSlowWarning: boolean;
   failureMessage: string;
   testFilePath: string;
+  testLocationLineNumber: number;
 }
 
 export const extractJestReports = (testData) => {
@@ -45,7 +46,8 @@ export const extractJestReports = (testData) => {
         suiteDuration: testResult.perfStats.runtime / 1000,
         suiteSlowWarning: testResult.perfStats.slow,
         failureMessage: test.failureMessages.toString().replace(/\n/g, '\\n') || '',
-        testFilePath: testResult.testFilePath
+        testFilePath: testResult.testFilePath,
+        testLocationLineNumber: test.location.line
       })),
   }));
   return mapTestReports(results);
