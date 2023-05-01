@@ -15,8 +15,13 @@ npm i https://github.com/gditdevelopment/idl-custom-jest-reporter.git#main
 3. Install required packages with `npm install`
 4. Make changes to source code in the `./src` directory
 5. From the `./core` directory, run `npm run build`
-6. Copy the `./dist` directory into the `@jest-performance-reporter/core` module you would like to update
-7. TODO: Figure out how to install module directly from this github repo
+6. In your node modules folder, create a folder called `idl-custom-jest-reporter`
+7. Copy the `./dist` directory into the `idl-custom-jest-report` folder you just created
+
+You can also install a specific branch of the reporter into your project using npm. Make sure to add enable the reporter as described below!
+```bash
+npm i https://github.gditdevelopment.com/idl-custom-jest-reporter.git#<your_branch_name>
+```
 
 # Setup
 
