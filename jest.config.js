@@ -1,6 +1,9 @@
 /** @returns {Promise<import('jest').Config>} */
 module.exports = async () => {
   return {
+    moduleNameMapper: {
+      '^axios$': require.resolve('axios'),
+    },
     "reporters": [
       "default",
       [
